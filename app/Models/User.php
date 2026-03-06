@@ -10,7 +10,7 @@ protected $table = 'users';
 
 protected $fillable = [
 
-'username', 'password',
+'username', 'password', 'gender',
 ];
 
 protected $hidden = [
