@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\UserJob;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
 
@@ -27,9 +28,11 @@ $rules = [
     'username' => 'required|string|unique:users,username|max:20',
     'password' => 'required|string|min:6|max:20',
     'gender' => 'required|in:male,female',
-];
+    'jobID' => 'required|integer|exists:user_job,jobID',];
 
 $this->validate($request,$rules);
+
+$userJob = UserJob::findOrFail($request->jobID);
 $user= User::create($request->all());
 return $this->successResponse($user, 201);
 
@@ -61,6 +64,7 @@ $rules = [
     'username' => 'required|string|unique:users,username,'.$id.'|max:20',
     'password' => 'required|string|min:6|max:20',
     'gender' => 'required|in:male,female',
+    'jobID' => 'required|integer|exists:user_job,jobID',
 ];
 $this->validate($request,$rules);
 
