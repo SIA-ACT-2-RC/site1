@@ -113,3 +113,7 @@ $app->router->group([
 });
 
 return $app;
+
+$app->middleware([
+    App\Http\Middleware\AuthenticateAccess::class,
+]);
